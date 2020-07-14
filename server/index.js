@@ -36,9 +36,6 @@ const redisPublisher = redisClient.duplicate();
 
 // Express route handlers
 
-app.get('/', (req, res) => {
-  res.send('Hi');
-});
 
 app.get('/values/all', async (req, res) => {
   const values = await pgClient.query('SELECT * from values');
@@ -64,6 +61,10 @@ app.post('/values', async (req, res) => {
   pgClient.query('INSERT INTO values(number) VALUES($1)', [index]);
 
   res.send({ working: true });
+});
+
+app.get('/', (req, res) => {
+  res.send('Hi');
 });
 
 app.listen(5000, (err) => {
