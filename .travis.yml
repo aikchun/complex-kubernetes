@@ -14,3 +14,9 @@ before_install:
   - docker build -t aikchun/react-test -f ./client/Dockerfile.dev ./client
 script:
   - docker run -e CI=true aikchun/react-test npm run test
+
+deploy:
+  provicer: script
+  script: bash ./deploy.sh
+  on:
+    branch: master
