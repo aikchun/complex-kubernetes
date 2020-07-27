@@ -10,3 +10,7 @@ before_install:
   - gcloud config set project maximal-quanta-284001
   - gcloud config set compute/zone asia-southeast1-a
   - gcloud container clusters get-credentials multi-cluster
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+  - docker build -t aikchun/react-test -f ./client/Dockerfile.dev ./client
+script:
+  - docker run -e CI=true aikchun/react-test npm run test
